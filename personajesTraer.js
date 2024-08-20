@@ -1,4 +1,5 @@
 var paginaNum = 1
+let cargados = false
 
 const imagenesClasificacion = {
     human_female:"clasificacion/humans.jpg  ",
@@ -28,6 +29,7 @@ const peticion = async (url, opciones) => {
 // Función asíncrona que controla el bucle del menú
 async function mostrarPersonajes(url) {
     let pagActual = url;
+    cargados = false
     // RECORRER PAGINAS
     while (pagActual!=null) {
         paginaNum++
@@ -101,6 +103,7 @@ async function mostrarPersonajes(url) {
         
         
     }
+    cargados = true
     paginaNum--
     
 
@@ -112,16 +115,23 @@ const url = `https://swapi.dev/api/people/?page=${paginaNum}`;
 mostrarPersonajes(url);
 async function mostrarFiltrados(url) {
     // RECORRER PAGINAS
+    
     const listaBotonesPersonajes = document.querySelectorAll(".btn")
     let listaCategorias = []
 
     listaBotonesPersonajes.forEach(element => {
         element.addEventListener("click",()=>{
+            
+            if (!cargados) {
+                alert("Los datos están cargando, espera...")
+                return
+            }
+            cargados=false
             document.getElementById("personajesContenedor").innerHTML=""
             
             let cat = element.value
             if (listaCategorias.includes(cat)) {
-                listaCategorias.splice(listaCategorias.indexOf(cat))
+                listaCategorias.splice(listaCategorias.indexOf(cat),1)
                 element.classList.remove("seleccionado")
 
             } else {
@@ -133,9 +143,6 @@ async function mostrarFiltrados(url) {
         })
     });
     
-    
-    
-
 }
 
 const filtrado = async function(listaCategorias) {
@@ -215,6 +222,8 @@ const filtrado = async function(listaCategorias) {
         
     }
     paginaNum--
+    cargados = true
+
 }
 
 mostrarFiltrados(url)
