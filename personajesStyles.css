@@ -11,6 +11,18 @@ body{
     background-size: contain;
 }
 
+#personajesContenedor{
+    width: 90%;
+}
+
+#contenedorPrincipalPersonajes{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
 .card{
     border: black;
     background-color: #111111e4;
@@ -34,4 +46,8 @@ body{
 
 .seleccionado:hover{
     background-color: #b498fc;
+}
+
+.modal-content{
+    height: 70vh;
 }

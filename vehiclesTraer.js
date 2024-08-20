@@ -1,20 +1,24 @@
 var paginaNum = 1
 let cargados = false
-
 const imagenesClasificacion = {
-    human_female:"clasificacion/humans.jpg  ",
-    human_male:"clasificacion/human_male.webp",
-    artificial: "clasificacion/artificial.png",
-    sentient: "clasificacion/sentient.jpg",
-    mammal: "clasificacion/mammals.jpg",
-    gastropod: "clasificacion/gastropodo.jpg",
-    amphibian: "clasificacion/amphibian.jpg",
-    reptile: "clasificacion/reptile.jpg",
-    unknown: "clasificacion/unknown.jpg",
-    insectoid: "clasificacion/insectoid.jpg",
-    reptilian: "clasificacion/reptilian.jpg"
+    wheeled:"vehicles/wheeled.png",
+    repulsorcraft:"vehicles/repulsorcraft.png",
+    starfighter: "vehicles/starFigther.png",
+    airspeeder: "vehicles/airSpeeder.png",
+    bomber: "vehicles/bomber.png",
+    assault_walker: "vehicles/assaultWalker.png",
+    walker: "vehicles/walker.png",
+    sail_barge: "vehicles/sailBarge.png",
+    droid_tank: "vehicles/starFigther.png",
+    droid_starfigther: "vehicles/airSpeeder.png",
+    bomber: "vehicles/bomber.png",
+    assault_walker: "vehicles/assaultWalker.png",
+    walker: "vehicles/walker.png",
+    sail_barge: "vehicles/sailBarge.png",
 };
 
+
+//let list =[repulsorcraft cargo skiff,speeder,wheeled walker,fire suppression ship,air speeder]
 //async / await
 const peticion = async (url, opciones) => {
     const respuesta = await fetch(url, opciones);
@@ -25,10 +29,11 @@ const peticion = async (url, opciones) => {
         return []
     }
 }
-// https://orig00.deviantart.net/514a/f/2016/352/3/0/darth_vader_ro_2_by_gillesmareschalart-das0stj.png
 // Función asíncrona que controla el bucle del menú
 async function mostrarPersonajes(url) {
     let pagActual = url;
+    console.log(pagActual);
+    
     cargados = false
     // RECORRER PAGINAS
     while (pagActual!=null) {
@@ -44,48 +49,55 @@ async function mostrarPersonajes(url) {
         elementos_object.forEach(async (item,index) => {
             
             // ver especie
-            let especie_data
-            // traer planeta 
-            const planeta = await fetch(item.homeworld)
-            planeta_data = await planeta.json()
-            planetaName = planeta_data.name
-            if (item.species.length!=0) {
-                //Treaer especie
-                const especie = await fetch(item.species)
-                especie_data = await especie.json()
-                especie_data = especie_data.classification
+//let list =[repulsorcraft cargo skiff,speeder,wheeled walker,fire suppression ship,air speeder]
 
-                
-            }else{
-                if (item.gender=="male") {
-                    especie_data="human_male"
-                    
-                } else {
-                    especie_data="human_female"
-                }
+            let nombre = item.name
+            let vehicle_class = item.vehicle_class
+            if (vehicle_class=="space/planetary bomber") {
+                vehicle_class="bomber"
             }
-            if (especie_data=="mammals") {
-                especie_data="mammal"   
+            if (vehicle_class=="assault walker") {
+                vehicle_class="assault_walker"
             }
-            let imagenChar = imagenesClasificacion[especie_data];
-            // cambiar human_male // female -> Human
-            if (especie_data=="human_male"||especie_data=="human_female") {
-                especie_data="human"
-            } 
+            if (vehicle_class=="sail barge") {
+                vehicle_class="sail_barge"
+            }
+            if (vehicle_class=="sail barge") {
+                vehicle_class="sail_barge"
+            }
+            if (vehicle_class=="speeder"||vehicle_class=="air speeder") {
+                vehicle_class="airspeeder"
+            }
+            if (vehicle_class=="wheeled walker") {
+                vehicle_class="wheeled"
+            }
+            if (vehicle_class=="sail barge") {
+                vehicle_class="sail_barge"
+            }
+            if (vehicle_class=="sail barge") {
+                vehicle_class="sail_barge"
+            }
+            let modelo = item.model
+            let CostoNave = item.cost_in_credits
+            let speed = item.max_atmosphering_speed
+            // traer planeta 
+            //Treaer especie
+
+            let imagenChar = imagenesClasificacion[vehicle_class];
             
             let dataCharInner = `
-                <div class="card clickable-container" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     <div class="interno row g-0">
                         <div class="col-sm-5">
                             <img class="imgChar img-fluid rounded-start" src="${imagenChar}" alt="Darth Vader">
                         </div>
                         <div class="col-sm-7">
                             <div class="card-body">
-                                <h4 class="card-title">${item.name}</h4>
-                                <p class="card-text"><strong>Gender: </strong>${item.gender}</p>
-                                <p class="card-text"><strong>Homeworld: </strong>${planetaName}</p>
-                                <p class="card-text"><strong>Height: </strong>${item.height}</p>
-                                <p class="card-text"><strong>Especie: </strong>${especie_data}</p>
+                                <h4 class="card-title">${nombre}</h4>
+                                <p class="card-text"><strong>Model: </strong>${modelo}</p>
+                                <p class="card-text"><strong>Class: </strong>${vehicle_class}</p>
+                                <p class="card-text"><strong>Cost: </strong>${CostoNave}</p>
+                                <p class="card-text"><strong>Max speed: </strong>${speed}</p>
                             </div>
                         </div>
                     </div>
@@ -110,7 +122,7 @@ async function mostrarPersonajes(url) {
 }
 
 // Iniciar el menú
-const url = `https://swapi.dev/api/people/?page=${paginaNum}`;
+const url = `https://swapi.dev/api/vehicles/?page=${paginaNum}`;
 
 mostrarPersonajes(url);
 async function mostrarFiltrados(url) {
@@ -232,7 +244,9 @@ const mostrarModal = function(){
     
     for (const cardContainer of modales) {
         cardContainer.addEventListener("click",()=>{
-            alert("hola")
+            setTimeout(() => {
+                document.querySelector(".modal-title").innerHTML = "jaja"
+            }, 1000);
         })
     }
 }
