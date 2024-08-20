@@ -1,0 +1,10 @@
+body{
+    background-image: url(https://static.vecteezy.com/system/resources/previews/006/262/236/large_2x/night-sky-with-stars-sparkling-on-black-background-free-photo.jpg);
+    background-size: cover  ;
+}
+
+.card{
+    border: none;
+    background-color: #111111e4;
+    color: rgb(236, 236, 236);
+}

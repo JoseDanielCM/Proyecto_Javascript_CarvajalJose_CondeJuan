@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjetas con Modal</title>
+    <style>
+        /* Estilo para las tarjetas */
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 16px;
+            margin: 10px;
+            width: 200px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Estilo para el fondo del modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        /* Estilo para el contenido del modal */
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 80%;
+            text-align: center;
+        }
+
+        /* Botón de cierre del modal */
+        .close-modal {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="card-container"></div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+            <button class="close-modal" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        // Array de diccionarios
+        const data = [
+            { title: "Tarjeta 1", description: "Descripción de la tarjeta 1" },
+            { title: "Tarjeta 2", description: "Descripción de la tarjeta 2" },
+            { title: "Tarjeta 3", description: "Descripción de la tarjeta 3" }
+        ];
+
+        const cardContainer = document.getElementById('card-container');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+
+        // Función para crear tarjetas dinámicamente
+        function createCards() {
+            data.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `<h3>${item.title}</h3><p>${item.description}</p>`;
+                
+                // Agregar evento de clic a cada tarjeta
+                card.addEventListener('click', () => {
+                    modalTitle.textContent = item.title;
+            modalDescription.textContent = item.description;
+            modal.style.display = 'flex';
+                });
+                
+                cardContainer.appendChild(card);
+            });
+        }
+
+        // Función para abrir el modal
+
+        // Función para cerrar el modal
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // Crear las tarjetas al cargar la página
+        createCards();
+    </script>
+</body>
+</html>
