@@ -47,9 +47,17 @@ async function mostrarPersonajes(url,listaCategorias) {
             // ver especie
             let especie_data
             // traer planeta 
-            const planeta = await fetch(item.homeworld)
-            let planeta_data = await planeta.json()
-            let planetaName = planeta_data.name
+            let planeta
+            let planeta_data
+            let planetaName
+            try {
+                planeta = await fetch(item.homeworld)
+                planeta_data = await planeta.json()
+                planetaName = planeta_data.name
+            } catch (error) {
+                planetaName = "unknown"
+            }
+            
             if (item.species.length!=0) {
                 //Treaer especie
                 const especie = await fetch(item.species)

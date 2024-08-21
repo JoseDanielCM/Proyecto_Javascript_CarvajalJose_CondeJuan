@@ -32,13 +32,24 @@ body{
 .containerBtn{
     display: flex !important;
     justify-content: space-around !important;
+    overflow-x: scroll;
 }
 
 .containerBtn > button {
     font-size: 1.8vw ;
+}   
+
+@media (min-width: 600px) {
+
+    .containerBtn {
+        -ms-overflow-style: none;  /* Para IE y Edge */
+        scrollbar-width: none;  /* Para Firefox */
+    }
+
+    .containerBtn::-webkit-scrollbar {
+        display: none;  /* Para Chrome, Safari y Opera */
+    }
 }
-
-
 
 .seleccionado{
     background-color: #9A71FF;
