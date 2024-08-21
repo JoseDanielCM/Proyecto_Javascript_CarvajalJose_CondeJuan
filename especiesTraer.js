@@ -80,18 +80,29 @@ async function mostrarPersonajes(url,listaCategorias) {
                 let modalElement = document.getElementById('staticBackdrop');
                 let modal = new bootstrap.Modal(modalElement);
 
+                let planetsStringList
+                let planetUrl = item.homeworld
+                if (planetUrl!=null) {
+                    const objectPlanet = await peticion(planetUrl);
+                    planetsStringList = objectPlanet.name
+                }else{
+                    planetsStringList = "n/a"
+                }
+                    
+                
+
                 cardContainer.addEventListener("click",()=>{
                     
                     modal.show()
                     document.getElementById("imgModal").src = imagenChar
                     document.getElementById("titleModal").innerText = item.name
-                    document.getElementById("Climate").innerText = climate
-                    document.getElementById("terrain").innerText = item.terrain
-                    document.getElementById("population").innerText = item.population
-                    document.getElementById("Diameter").innerText = item.diameter
-                    document.getElementById("gravity").innerText = item.gravity
-                    document.getElementById("rotation_period").innerText = item.rotation_period
-                    document.getElementById("orbital_period").innerText = item.orbital_period
+                    document.getElementById("classification").innerText = item.classification
+                    document.getElementById("language").innerText = item.language
+                    document.getElementById("average_height").innerText = item.average_height
+                    document.getElementById("average_lifespan").innerText = item.average_lifespan
+                    document.getElementById("homeworld").innerText = planetsStringList
+                    document.getElementById("skin_colors").innerText = item.skin_colors
+                    document.getElementById("hair_colors").innerText = item.hair_colors
             
                 })
 

@@ -70,11 +70,9 @@ async function mostrarPersonajes(url) {
             let listaUrlPlanetas = item.planets
             let planetsStringList = ""
             for (const planetUrl of listaUrlPlanetas) {
-                console.log(planetUrl);
                 const objectPlanet = await peticion(planetUrl);
-                let elementPlanet = objectPlanet.results
                 
-                planetsStringList += objectPlanet.name
+                planetsStringList += objectPlanet.name+", "
             }
 
         // ***********************
