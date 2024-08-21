@@ -9,12 +9,13 @@ const imagenesClasificacion = {
     assault_walker: "vehicles/assaultWalker.png",
     walker: "vehicles/walker.png",
     sail_barge: "vehicles/sailBarge.png",
-    droid_tank: "vehicles/starFigther.png",
-    droid_starfigther: "vehicles/airSpeeder.png",
-    bomber: "vehicles/bomber.png",
-    assault_walker: "vehicles/assaultWalker.png",
-    walker: "vehicles/walker.png",
-    sail_barge: "vehicles/sailBarge.png",
+    droidTank: "vehicles/droidTank.png",
+    droid_starfighter: "vehicles/droid_starfigther.png",
+    transport: "vehicles/transport.png",
+    gunship: "vehicles/gunship.png",
+    submarine: "vehicles/submarine.png",
+    landing: "vehicles/landing.png",
+    fire_suppression:"vehicles/fire.png"
 };
 
 
@@ -71,11 +72,20 @@ async function mostrarPersonajes(url) {
             if (vehicle_class=="wheeled walker") {
                 vehicle_class="wheeled"
             }
-            if (vehicle_class=="sail barge") {
-                vehicle_class="sail_barge"
+            if (vehicle_class=="repulsorcraft cargo skiff") {
+                vehicle_class="repulsorcraft"
             }
-            if (vehicle_class=="sail barge") {
-                vehicle_class="sail_barge"
+            if (vehicle_class=="droid tank") {
+                vehicle_class="droidTank"
+            }
+            if (vehicle_class=="landing craft") {
+                vehicle_class="landing"
+            }
+            if (vehicle_class=="droid starfighter") {
+                vehicle_class="droid_starfighter"
+            }
+            if (vehicle_class=="fire suppression ship") {
+                vehicle_class="fire_suppression"
             }
             let modelo = item.model
             let CostoNave = item.cost_in_credits
