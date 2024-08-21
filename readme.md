@@ -14,6 +14,7 @@ Tabla de contenidos 📋
 
 
 Mapeo 🛠️
+Cantidad de elementos por cada página
 ```mermaid
 graph LR
 A[SWAPI] --> B(Personajes)
