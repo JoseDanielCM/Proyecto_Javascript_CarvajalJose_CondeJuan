@@ -14,7 +14,7 @@ Tabla de contenidos 📋
 
 
 Mapeo 🛠️
-
+```mermaid
 graph LR
 A[SWAPI] --> B(Personajes)
 A --> C(Planetas)
@@ -28,7 +28,7 @@ D --> J((6))
 E --> K((37)) 
 F --> L((39))
 G --> M((36))
-
+```
 
     [!IMPORTANT]
     Si los recursos o los datos solicitados no aparecen espera a que la informacion llegue

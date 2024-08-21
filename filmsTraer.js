@@ -66,7 +66,7 @@ async function mostrarPersonajes(url) {
         let modal = new bootstrap.Modal(modalElement);
 
         // sacar info planetas
-        /*
+        
             let listaUrlPlanetas = item.planets
             let planetsStringList = ""
             for (const planetUrl of listaUrlPlanetas) {
@@ -74,8 +74,8 @@ async function mostrarPersonajes(url) {
                 const objectPlanet = await peticion(planetUrl);
                 let elementPlanet = objectPlanet.results
                 
-                planetsStringList += elementPlanet.name
-            }*/
+                planetsStringList += objectPlanet.name
+            }
 
         // ***********************
         cardContainer.addEventListener("click",()=>{
@@ -87,7 +87,7 @@ async function mostrarPersonajes(url) {
             document.getElementById("director").innerText = item.director
             document.getElementById("producer").innerText = item.producer
             document.getElementById("release_date").innerText = item.release_date
-            document.getElementById("planets").innerText = item.planetsStringList
+            document.getElementById("planets").innerText = planetsStringList
     
         })
 
