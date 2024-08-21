@@ -4,13 +4,13 @@ En este repositorio encontrarás el consumo de la API de Star Wars con toda info
 ### Tabla de contenidos 📋
 | Indice | Titulo  |
 |--|--|
-| 1 | [Mapeo API](#Mapeo) |
-| 2 | [Personajes](#Personajes) |
-| 3 | [Planetas](#Planetas) |
-| 4 | [Peliculas](#Peliculas) |
-| 4 | [Especies](#Especies) |
-| 4 | [Vehiculos](#Vehiculos) |
-| 4 | [Naves](#Naves) |
+| 1 | [Mapeo API](#mapeo) |
+| 2 | [Personajes](#personajes) |
+| 3 | [Planetas](#planetas) |
+| 4 | [Peliculas](#peliculas) |
+| 4 | [Especies](#especies) |
+| 4 | [Vehiculos](#vehiculos) |
+| 4 | [Naves](#naves) |
 
 
 ### Mapeo 🛠️
