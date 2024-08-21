@@ -2,26 +2,26 @@ var paginaNum = 1
 let cargados = false
 
 const imagenesClasificacion = {
-    wheeled:"vehicles/wheeled.png",
-    repulsorcraft:"vehicles/repulsorcraft.png",
-    starfighter: "vehicles/starFigther.png",
-    airspeeder: "vehicles/airSpeeder.png",
-    bomber: "vehicles/bomber.png",
-    assault_walker: "vehicles/assaultWalker.png",
-    walker: "vehicles/walker.png",
-    sail_barge: "vehicles/sailBarge.png",
-    droidTank: "vehicles/droidTank.png",
-    droid_starfighter: "vehicles/droid_starfigther.png",
-    transport: "vehicles/transport.png",
-    gunship: "vehicles/gunship.png",
-    submarine: "vehicles/submarine.png",
-    landing: "vehicles/landing.png",
-    fire_suppression:"vehicles/fire.png",
-    transport: "vehicles/transport.png",
-    gunship: "vehicles/gunship.png",
-    submarine: "vehicles/submarine.png",
-    landing: "vehicles/landing.png",
-    fire_suppression:"vehicles/fire.png"
+    corvette:"starships/corvette.png",
+    Star_Destroyer:"starships/starDestroyer.png",
+    landing_craft: "starships/landingCraft.png",
+    Deep_Space_Mobile_Battlestation: "starships/battlestation.png",
+    Light_freighter: "starships/lightFighter.png",
+    assault_starfighter: "starships/assaultStarfighter.png",
+    Starfighter: "starships/Starfighter.png",
+    Star_dreadnought: "starships/starDread.png",
+    Medium_transport: "starships/medTransport.png",
+    Patrol_craft: "starships/patrol.png",
+    Armed_government_transport: "starships/armedTransport.png",
+    Escort_ship: "starships/escort.png",
+    cruiser: "starships/cruiser.png",
+    Droid_control_ship: "starships/droid.png",
+    yacht:"starships/yacht.png",
+    Space_Transport: "starships/spaceTransport.png",
+    Diplomatic_barge: "starships/barge.png",
+    freighter: "starships/freighter.png",
+    capital_ship: "starships/capital.png",
+    transport:"starships/transport.png",
 };
 
 //async / await
@@ -57,6 +57,23 @@ async function mostrarPersonajes(url,listaCategorias) {
 
             let nombre = item.name
             let vehicle_class = item.starship_class
+
+            vehicle_class = vehicle_class.replaceAll(" ","_")
+            if (vehicle_class=="Assault_Starfighter") {
+                vehicle_class="assault_starfighter"
+            }
+            if (vehicle_class=="Star_Cruiser"||vehicle_class=="Space_cruiser") {
+                vehicle_class="cruiser"
+            }
+            if (vehicle_class=="starfighter") {
+                vehicle_class="Starfighter"
+            }
+            if (vehicle_class=="star_destroyer") {
+                vehicle_class="Star_Destroyer"
+            }
+            if (vehicle_class=="assault_ship") {
+                vehicle_class="assault_starfighter"
+            }
             
             let CostoNave = item.cost_in_credits
             let length = item.length
@@ -65,9 +82,9 @@ async function mostrarPersonajes(url,listaCategorias) {
             //Treaer especie
 
             let imagenChar = imagenesClasificacion[vehicle_class];
-            //if (listaCategorias.includes(vehicle_class)) {
+            if (listaCategorias.includes(vehicle_class)) {
                 let dataCharInner = `
-                    <div class="card" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    <div class="card">
                         <div class="interno row g-0">
                             <div class="col-sm-5">
                                 <img class="imgChar img-fluid rounded-start" src="${imagenChar}" alt="Darth Vader">
@@ -89,7 +106,7 @@ async function mostrarPersonajes(url,listaCategorias) {
                 cardContainer.classList.add("col")
 
                 //*********************************** MODAL********************************** */
-                /*
+                
                 let modalElement = document.getElementById('staticBackdrop');
                 let modal = new bootstrap.Modal(modalElement);
 
@@ -98,25 +115,25 @@ async function mostrarPersonajes(url,listaCategorias) {
                     modal.show()
                     document.getElementById("imgModal").src = imagenChar
                     document.getElementById("titleModal").innerText = item.name
-                    document.getElementById("height").innerText = item.height
-                    document.getElementById("hair").innerText = item.hair_color
-                    document.getElementById("skin").innerText = item.skin_color
-                    document.getElementById("eye").innerText = item.eye_color
-                    document.getElementById("gender").innerText = item.gender
-                    document.getElementById("classification").innerText = especie_data
-                    document.getElementById("homeworld").innerText = planetaName
+                    document.getElementById("cost_in_credits").innerText = item.cost_in_credits
+                    document.getElementById("length").innerText = item.length
+                    document.getElementById("max_atmosphering_speed").innerText = item.max_atmosphering_speed
+                    document.getElementById("passengers").innerText = item.passengers
+                    document.getElementById("cargo_capacity").innerText = item.cargo_capacity
+                    document.getElementById("vehicle_class").innerText = vehicle_class
+                    document.getElementById("consumables").innerText = item.consumables
             
                 })
 
                 document.getElementById('btnCerrar').addEventListener('click', () => {
                 modal.hide();
                 
-                });*/
+                });
                 // **********************************************************************************
                 cardContainer.innerHTML = dataCharInner
 
                 document.getElementById("personajesContenedor").appendChild(cardContainer)
-            //}
+            }
         });
     
         
