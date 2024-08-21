@@ -1,5 +1,6 @@
 var paginaNum = 1
 let cargados = false
+
 const imagenesClasificacion = {
     wheeled:"vehicles/wheeled.png",
     repulsorcraft:"vehicles/repulsorcraft.png",
@@ -18,8 +19,6 @@ const imagenesClasificacion = {
     fire_suppression:"vehicles/fire.png"
 };
 
-
-//let list =[repulsorcraft cargo skiff,speeder,wheeled walker,fire suppression ship,air speeder]
 //async / await
 const peticion = async (url, opciones) => {
     const respuesta = await fetch(url, opciones);
@@ -31,7 +30,7 @@ const peticion = async (url, opciones) => {
     }
 }
 // Función asíncrona que controla el bucle del menú
-async function mostrarPersonajes(url) {
+async function mostrarPersonajes(url,listaCategorias) {
     let pagActual = url;
     console.log(pagActual);
     
@@ -50,7 +49,6 @@ async function mostrarPersonajes(url) {
         elementos_object.forEach(async (item,index) => {
             
             // ver especie
-//let list =[repulsorcraft cargo skiff,speeder,wheeled walker,fire suppression ship,air speeder]
 
             let nombre = item.name
             let vehicle_class = item.vehicle_class
@@ -94,53 +92,76 @@ async function mostrarPersonajes(url) {
             //Treaer especie
 
             let imagenChar = imagenesClasificacion[vehicle_class];
-            
-            let dataCharInner = `
-                <div class="card" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    <div class="interno row g-0">
-                        <div class="col-sm-5">
-                            <img class="imgChar img-fluid rounded-start" src="${imagenChar}" alt="Darth Vader">
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="card-body">
-                                <h4 class="card-title">${nombre}</h4>
-                                <p class="card-text"><strong>Model: </strong>${modelo}</p>
-                                <p class="card-text"><strong>Class: </strong>${vehicle_class}</p>
-                                <p class="card-text"><strong>Cost: </strong>${CostoNave}</p>
-                                <p class="card-text"><strong>Max speed: </strong>${speed}</p>
+            if (listaCategorias.includes(vehicle_class)) {
+                let dataCharInner = `
+                    <div class="card" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <div class="interno row g-0">
+                            <div class="col-sm-5">
+                                <img class="imgChar img-fluid rounded-start" src="${imagenChar}" alt="Darth Vader">
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="card-body">
+                                    <h4 class="card-title">${nombre}</h4>
+                                    <p class="card-text"><strong>Model: </strong>${modelo}</p>
+                                    <p class="card-text"><strong>Class: </strong>${vehicle_class}</p>
+                                    <p class="card-text"><strong>Cost: </strong>${CostoNave}</p>
+                                    <p class="card-text"><strong>Max speed: </strong>${speed}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                `
+                    `
 
-            let cardContainer = document.createElement("section")
-            cardContainer.classList.add("col")
+                let cardContainer = document.createElement("section")
+                cardContainer.classList.add("col")
 
-            cardContainer.innerHTML = dataCharInner
+                //*********************************** MODAL********************************** */
+                
+                let modalElement = document.getElementById('staticBackdrop');
+                let modal = new bootstrap.Modal(modalElement);
 
-            document.getElementById("personajesContenedor").appendChild(cardContainer)
+                cardContainer.addEventListener("click",()=>{
+                    
+                    modal.show()
+                    document.getElementById("imgModal").src = imagenChar
+                    document.getElementById("titleModal").innerText = item.name
+                    document.getElementById("Model").innerText = item.model
+                    document.getElementById("Cost").innerText = item.cost_in_credits
+                    document.getElementById("length").innerText = item.length
+                    document.getElementById("speed").innerText = item.max_atmosphering_speed
+                    document.getElementById("crew").innerText = item.crew
+                    document.getElementById("passengers").innerText = item.passengers
+                    document.getElementById("class").innerText = vehicle_class
+            
+                })
 
+                document.getElementById('btnCerrar').addEventListener('click', () => {
+                modal.hide();
+                
+                });
+                // **********************************************************************************
+                cardContainer.innerHTML = dataCharInner
+
+                document.getElementById("personajesContenedor").appendChild(cardContainer)
+            }
         });
-        
+    
         
     }
     cargados = true
     paginaNum--
-    mostrarModal()
 
 }
 
 // Iniciar el menú
 const url = `https://swapi.dev/api/vehicles/?page=${paginaNum}`;
 
-mostrarPersonajes(url);
 async function mostrarFiltrados(url) {
     // RECORRER PAGINAS
     
     const listaBotonesPersonajes = document.querySelectorAll(".botonFiltro")
-    let listaCategorias = []
-
+    let listaCategorias = Object.keys(imagenesClasificacion)
+    mostrarPersonajes(url,listaCategorias)
     listaBotonesPersonajes.forEach(element => {
         element.addEventListener("click",()=>{
             
@@ -161,103 +182,11 @@ async function mostrarFiltrados(url) {
                 element.classList.add("seleccionado")
             }
             console.log(listaCategorias);
-            filtrado(listaCategorias)
+            mostrarPersonajes(url,listaCategorias)
         })
     });
+    listaCategorias = []
     
 }
 
-const filtrado = async function(listaCategorias) {
-    let pagActual = url;
-    while (pagActual!=null) {
-        const principal_object = await peticion(pagActual);
-        pagActual = principal_object.next; 
-
-        let elementos_object = principal_object.results
-        
-        // RECORRER PERSONAJES 
-        // PAGINA ACTUAL
-        
-        await elementos_object.forEach(async (item,index) => {
-            
-            // ver especie
-            let especie_data
-            // traer planeta 
-            const planeta = await fetch(item.homeworld)
-            planeta_data = await planeta.json()
-            planetaName = planeta_data.name
-            if (item.species.length!=0) {
-                //Treaer especie
-                const especie = await fetch(item.species)
-                especie_data = await especie.json()
-                especie_data = especie_data.classification
-
-                
-            }else{
-                if (item.gender=="male") {
-                    especie_data="human_male"
-                    
-                } else {
-                    especie_data="human_female"
-                }
-            }
-            if (especie_data=="mammals") {
-                especie_data="mammal"   
-            }
-            let imagenChar = imagenesClasificacion[especie_data];
-            // cambiar human_male // female -> Human
-            if (especie_data=="human_male"||especie_data=="human_female") {
-                especie_data="human"
-            } 
-            
-            if (listaCategorias.includes(especie_data)) {
-            
-            let dataCharInner = `
-                <div class="card">
-                    <div class="interno row g-0">
-                        <div class="col-sm-5">
-                            <img class="imgChar img-fluid rounded-start" src="${imagenChar}" alt="Darth Vader">
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="card-body">
-                                <h4 class="card-title">${item.name}</h4>
-                                <p class="card-text"><strong>Gender: </strong>${item.gender}</p>
-                                <p class="card-text"><strong>Homeworld: </strong>${planetaName}</p>
-                                <p class="card-text"><strong>Height: </strong>${item.height}</p>
-                                <p class="card-text"><strong>Especie: </strong>${especie_data}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                `
-
-            let cardContainer = document.createElement("section")
-            cardContainer.classList.add("col")
-
-            cardContainer.innerHTML = dataCharInner
-
-            document.getElementById("personajesContenedor").appendChild(cardContainer)
-            }
-        }
-    );
-        
-        
-    }
-    paginaNum--
-    cargados = true
-
-}
-
-const mostrarModal = function(){
-    const modales = document.querySelectorAll(".card");
-    console.log(modales);
-    
-    for (const cardContainer of modales) {
-        cardContainer.addEventListener("click",()=>{
-            setTimeout(() => {
-                document.querySelector(".modal-title").innerHTML = "jaja"
-            }, 1000);
-        })
-    }
-}
 mostrarFiltrados(url)

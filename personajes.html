@@ -22,7 +22,7 @@
     </nav>
 
     <p class="containerBtn d-inline-flex gap-5 ms-5 me-5 mt-5">
-        <button class="botonFiltro btn btn-dark btn-sm w-50" value="human" data-bs-toggle="button">Humans</button>
+        <button class="botonFiltro btn btn-dark btn-sm w-50" value="human" type="button">Humans</button>
         <button class="botonFiltro btn btn-dark btn-sm w-50" value="artificial" type="button">Artificial</button>
         <button class="botonFiltro btn btn-dark btn-sm w-50" value="sentient" type="button">Sentient</button>
         <button class="botonFiltro btn btn-dark btn-sm w-50" value="mammal" type="button">Mammal</button>
@@ -38,28 +38,23 @@
 
     <!-- Modal -->
     <section class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
                     <button id="btnCerrar" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis rem numquam minima reprehenderit suscipit tempore, commodi dolorum rerum optio labore. Dicta perferendis praesentium commodi culpa in aliquid sint voluptas perspiciatis?
-                    Quisquam molestias fuga perferendis sit et, animi accusantium veritatis ab culpa eos. Blanditiis cumque adipisci animi quae mollitia at velit iure eaque, quam quos molestias tenetur perferendis nobis nostrum repellat!
-                    Amet, recusandae doloremque aut repellat perferendis aliquam laborum, nihil ad repellendus hic dignissimos officia nam placeat, laboriosam neque! Ratione in quos nemo quis sint asperiores eligendi, ea tempora eos vero.
-                    Aut blanditiis corporis excepturi velit nihil perspiciatis ipsum, necessitatibus a consectetur quasi nobis, sapiente ut quos vitae hic accusamus quam soluta doloremque modi! Ad rerum consequatur sint dolore, aspernatur illum.
-                    Velit fugit nemo veritatis unde excepturi odio nobis perferendis, quae eum quasi molestiae distinctio expedita quos laboriosam animi earum quam beatae adipisci ea dignissimos. Commodi id porro exercitationem quas non.
-                    Hic quas dolor velit tempora unde veritatis praesentium iure. Ad officia rerum ex ut laborum accusantium mollitia, velit expedita error sunt aperiam eum est, ipsum dolore fuga possimus. Officiis, ipsum.
-                    Aperiam nulla, earum est dolor deserunt officia nobis eveniet magni vero voluptatum veritatis. Sunt, aut ipsum impedit reiciendis sit rerum est illo, maxime commodi, totam minima eligendi deleniti ullam exercitationem.
-                    Reiciendis modi sed libero? Magni necessitatibus ex minima? Ea iste dignissimos, minima corporis incidunt illum vero culpa veniam officiis aperiam dolor blanditiis quas odio amet ipsam? Eligendi voluptatum dolor cupiditate.
-                    Quas eveniet, asperiores ipsa suscipit dolorem perferendis natus atque in qui doloribus veniam et unde magnam adipisci ex ullam laboriosam consectetur velit ipsam? Corrupti magni ut aliquid voluptates expedita cumque.
-                    Dolore aliquid cum magni. Aspernatur voluptatibus natus libero odio saepe soluta adipisci odit debitis enim eius, amet ea pariatur. Minima pariatur dignissimos dolores libero temporibus illum assumenda inventore in ad!
-                    Debitis, odit quod accusantium illo deleniti quo rerum dicta sapiente deserunt et repellendus eaque laudantium earum porro officiis commodi possimus, similique, eum ullam modi esse voluptates. Adipisci omnis ipsa porro?
-                    Distinctio laudantium neque, perferendis eaque commodi, expedita corporis, quos nemo quo deserunt iure officia possimus minus natus dolor assumenda at saepe modi quidem odio. Ex perspiciatis incidunt quisquam distinctio dignissimos?
-                    Repudiandae vitae perspiciatis sed explicabo dolores ab aperiam, vero, consequatur magnam accusantium harum, nihil distinctio omnis delectus rerum minus earum quisquam tempore tempora? Cupiditate ad culpa, sit laudantium itaque doloremque.
-                    Ratione harum vel temporibus ipsa natus error atque in tenetur. Ratione rerum sint alias illum, consequuntur dolor aspernatur magnam reiciendis. Repellat rem dolorum tempora possimus commodi aut voluptate labore minus.
-                    Explicabo quidem ad fuga reprehenderit veritatis exercitationem nobis perspiciatis quam labore iusto aliquid iure illum minima tenetur temporibus quos culpa consequatur quis, possimus fugiat porro! Neque eius placeat reprehenderit at?
+                    <div id="contenedorImagenModal">
+                        <img id="imgModal" src="foto.jpg" alt="">
+                    </div>
+                    <h1 id="titleModal">Title</h1>
+                    <p><strong>Height: </strong><span id="height"></span></p>
+                    <p><strong>Hair: </strong><span id="hair"></span></p>
+                    <p><strong>Skin: </strong><span id="skin"></span></p>
+                    <p><strong>Eye: </strong><span id="eye"></span></p>
+                    <p><strong>Gender: </strong><span id="gender"></span></p>
+                    <p><strong>Classification: </strong><span id="classification"></span></p>
+                    <p><strong>Homeworld: </strong><span id="homeworld"></span></p>
                 </div>
                 
             </div>
