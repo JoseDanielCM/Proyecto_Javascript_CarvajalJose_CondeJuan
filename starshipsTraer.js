@@ -16,6 +16,11 @@ const imagenesClasificacion = {
     gunship: "vehicles/gunship.png",
     submarine: "vehicles/submarine.png",
     landing: "vehicles/landing.png",
+    fire_suppression:"vehicles/fire.png",
+    transport: "vehicles/transport.png",
+    gunship: "vehicles/gunship.png",
+    submarine: "vehicles/submarine.png",
+    landing: "vehicles/landing.png",
     fire_suppression:"vehicles/fire.png"
 };
 
@@ -51,48 +56,16 @@ async function mostrarPersonajes(url,listaCategorias) {
             // ver especie
 
             let nombre = item.name
-            let vehicle_class = item.vehicle_class
-            if (vehicle_class=="space/planetary bomber") {
-                vehicle_class="bomber"
-            }
-            if (vehicle_class=="assault walker") {
-                vehicle_class="assault_walker"
-            }
-            if (vehicle_class=="sail barge") {
-                vehicle_class="sail_barge"
-            }
-            if (vehicle_class=="sail barge") {
-                vehicle_class="sail_barge"
-            }
-            if (vehicle_class=="speeder"||vehicle_class=="air speeder") {
-                vehicle_class="airspeeder"
-            }
-            if (vehicle_class=="wheeled walker") {
-                vehicle_class="wheeled"
-            }
-            if (vehicle_class=="repulsorcraft cargo skiff") {
-                vehicle_class="repulsorcraft"
-            }
-            if (vehicle_class=="droid tank") {
-                vehicle_class="droidTank"
-            }
-            if (vehicle_class=="landing craft") {
-                vehicle_class="landing"
-            }
-            if (vehicle_class=="droid starfighter") {
-                vehicle_class="droid_starfighter"
-            }
-            if (vehicle_class=="fire suppression ship") {
-                vehicle_class="fire_suppression"
-            }
-            let modelo = item.model
+            let vehicle_class = item.starship_class
+            
             let CostoNave = item.cost_in_credits
+            let length = item.length
             let speed = item.max_atmosphering_speed
             // traer planeta 
             //Treaer especie
 
             let imagenChar = imagenesClasificacion[vehicle_class];
-            if (listaCategorias.includes(vehicle_class)) {
+            //if (listaCategorias.includes(vehicle_class)) {
                 let dataCharInner = `
                     <div class="card" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                         <div class="interno row g-0">
@@ -102,7 +75,7 @@ async function mostrarPersonajes(url,listaCategorias) {
                             <div class="col-sm-7">
                                 <div class="card-body">
                                     <h4 class="card-title">${nombre}</h4>
-                                    <p class="card-text"><strong>Model: </strong>${modelo}</p>
+                                    <p class="card-text"><strong>length: </strong>${length}</p>
                                     <p class="card-text"><strong>Class: </strong>${vehicle_class}</p>
                                     <p class="card-text"><strong>Cost: </strong>${CostoNave}</p>
                                     <p class="card-text"><strong>Max speed: </strong>${speed}</p>
@@ -143,7 +116,7 @@ async function mostrarPersonajes(url,listaCategorias) {
                 cardContainer.innerHTML = dataCharInner
 
                 document.getElementById("personajesContenedor").appendChild(cardContainer)
-            }
+            //}
         });
     
         
@@ -154,7 +127,7 @@ async function mostrarPersonajes(url,listaCategorias) {
 }
 
 // Iniciar el menú
-const url = `https://swapi.dev/api/vehicles/?page=${paginaNum}`;
+const url = `https://swapi.dev/api/starships/?page=${paginaNum}`;
 
 async function mostrarFiltrados(url) {
     // RECORRER PAGINAS
