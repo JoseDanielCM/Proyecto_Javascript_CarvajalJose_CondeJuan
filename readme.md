@@ -22,12 +22,12 @@ A --> D(Películas)
 A --> E(Especies)
 A --> F(Vehículos)
 A --> G(Naves)
-B --DOM--> H(82)
-C --DOM--> I(60)
-D --DOM--> J(6)
-E --DOM--> K(37) 
-F --DOM--> L(39)
-G --DOM--> M(36)
+B --> H((82))
+C --> I((60))
+D --> J((6))
+E --> K((37)) 
+F --> L((39))
+G --> M((36))
 
 
     [!IMPORTANT]
