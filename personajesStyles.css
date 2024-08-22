@@ -51,6 +51,7 @@ body{
     }
 }
 
+
 .seleccionado{
     background-color: #9A71FF;
 }
@@ -82,4 +83,25 @@ body{
     display: flex;
     justify-content: center;
     margin-bottom: 2vw;
+}
+@media (max-width: 700px) {
+
+    .containerBtn{
+        display: flex !important;
+        justify-content: space-between !important;
+        overflow-x: scroll;
+    }
+
+    .containerBtn > button {
+        font-size: 3.5vw ;
+    }   
+
+    #titleModal{
+        font-size: 7vw;
+        font-weight: bold;
+    }
+
+    .modal-body > p{
+        font-size: 5vw;
+    }
 }
